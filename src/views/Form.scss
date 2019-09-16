@@ -21,6 +21,7 @@
 			border-radius: 4px;
 			background-color: #ffffff;
 			header {
+				margin-bottom: 8px;
 				letter-spacing: 1px;
 				color: rgba(8, 34, 24, 0.8);
 			}
@@ -30,10 +31,13 @@
 				padding: 16px 24px;
 				box-sizing: border-box;
 			}
+			footer {
+				display: flex;
+				flex-direction: row-reverse;
+			}
 			.form {
 				padding: 16px 24px;
 				box-sizing: border-box;
-				border-top: 2px dashed rgba(8, 34, 24, 0.20);
 				.each-item {
 					margin-bottom: 24px;
 					p {

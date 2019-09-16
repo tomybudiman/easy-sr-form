@@ -1,5 +1,6 @@
 import React from "react";
 
+import Button from '@material-ui/core/Button';
 import Slider from "@material-ui/core/Slider";
 import {withStyles} from "@material-ui/core/styles";
 
@@ -40,6 +41,15 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
+const CustomButton = withStyles({
+  root: {
+    backgroundColor: "#42a5f4",
+    '&:focus,&:hover,&$active': {
+      backgroundColor: "#0077c2"
+    }
+  }
+})(Button);
+
 const Form = () => {
   return(
     <div className="form-container">
@@ -58,7 +68,9 @@ const Form = () => {
             )
           })}
         </div>
-        <footer></footer>
+        <footer>
+          <CustomButton variant="contained" color="primary">Submit</CustomButton>
+        </footer>
       </div>
     </div>
   )
