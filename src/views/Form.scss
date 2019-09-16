@@ -1,0 +1,56 @@
+@mixin form-container {
+	$header-height: 64px;
+	.form-container {
+		display: flex;
+		position: relative;
+		justify-content: center;
+		padding: 175px 0 100px 0;
+		.form-background {
+			top: 0;
+			left: 0;
+			right: 0;
+			position: absolute;
+			background-color: #42a5f4;
+			height: 175px + $header-height;
+			border-bottom: 2px solid rgba(8, 34, 24, 0.10);
+		}
+		.form-body {
+			width: 90%;
+			max-width: 768px;
+			position: relative;
+			border-radius: 4px;
+			background-color: #ffffff;
+			header {
+				letter-spacing: 1px;
+				color: rgba(8, 34, 24, 0.8);
+			}
+			header, footer {
+				font-size: 24px;
+				min-height: 64px;
+				padding: 16px 24px;
+				box-sizing: border-box;
+			}
+			.form {
+				padding: 16px 24px;
+				box-sizing: border-box;
+				border-top: 2px dashed rgba(8, 34, 24, 0.20);
+				.each-item {
+					margin-bottom: 24px;
+					p {
+						font-size: 16px;
+						line-height: 24px;
+						margin: 0 0 8px 0;
+						color: rgba(8, 34, 24, 0.70);
+					}
+					&:last-child {
+						margin-bottom: 0;
+					}
+					.rate-slider {
+						padding: 0 8px;
+						box-sizing: border-box;
+					}
+				}
+			}
+		}
+	}
+}
