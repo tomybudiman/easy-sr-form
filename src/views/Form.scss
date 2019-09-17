@@ -34,6 +34,9 @@
 			footer {
 				display: flex;
 				flex-direction: row-reverse;
+				button {
+					color: #ffffff;
+				}
 			}
 			.form {
 				padding: 16px 24px;
@@ -49,9 +52,10 @@
 					&:last-child {
 						margin-bottom: 0;
 					}
-					.rate-slider {
-						padding: 0 8px;
-						box-sizing: border-box;
+					.radio-button-group {
+						display: flex;
+						flex-direction: row;
+						justify-content: space-between;
 					}
 				}
 			}

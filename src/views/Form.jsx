@@ -1,75 +1,47 @@
-import React from "react";
+import React, {useState} from "react";
 
-import Button from '@material-ui/core/Button';
-import Slider from "@material-ui/core/Slider";
-import {withStyles} from "@material-ui/core/styles";
+import Radio from "@material-ui/core/Radio";
+import Button from "@material-ui/core/Button";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import useStateWithCallback from "use-state-with-callback";
 
 import jsonData from "../questions.json";
 
-const PrettoSlider = withStyles({
-  root: {
-    color: "#42a5f4",
-    height: 8,
-  },
-  thumb: {
-    width: 24,
-    height: 24,
-    marginTop: -8,
-    marginLeft: -12,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
-    '&:focus,&:hover,&$active': {
-      boxShadow: 'inherit',
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: "calc(-50% + 4px)",
-  },
-  track: {
-    height: 8,
-    borderRadius: 4,
-  },
-  mark: {
-    width: 8,
-    height: 8,
-    borderRadius: '50%'
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4,
-  },
-})(Slider);
-
-const CustomButton = withStyles({
-  root: {
-    backgroundColor: "#42a5f4",
-    '&:focus,&:hover,&$active': {
-      backgroundColor: "#0077c2"
-    }
-  }
-})(Button);
-
 const Form = () => {
+  const [isFormValid, setFormValidation] = useState(false);
+  const [formData, updateFormData] = useStateWithCallback(jsonData.map(each => ({...each, value: null})), () => {
+    setFormValidation(formData.filter(each => each.value !== null).length === formData.length);
+  });
+  const radioButtonHandler = (data, id) => {
+    updateFormData(formData.map(each => {
+      if(each.id === id){
+        return {...each, value: data}
+      }
+      return each
+    }));
+  };
   return(
     <div className="form-container">
       <span className="form-background"/>
       <div className="form-body">
         <header>Question Form</header>
         <div className="form">
-          {Object.values(jsonData).map((each, i) => {
-            return(
-              <div className="each-item" key={i}>
-                <p>{i + 1}. {each.question}</p>
-                <div className="rate-slider">
-                  <PrettoSlider valueLabelDisplay="auto" min={0} max={5} marks/>
-                </div>
-              </div>
-            )
-          })}
+          {formData.map((each, i) => (
+            <div className="each-item" key={i}>
+              <p>{i + 1}. {each.question}</p>
+              <RadioGroup className="radio-button-group" onChange={e => radioButtonHandler(e.target.value, each.id)}>
+                <FormControlLabel value="1" control={<Radio color="primary"/>} label="1"/>
+                <FormControlLabel value="2" control={<Radio color="primary"/>} label="2"/>
+                <FormControlLabel value="3" control={<Radio color="primary"/>} label="3"/>
+                <FormControlLabel value="4" control={<Radio color="primary"/>} label="4"/>
+                <FormControlLabel value="5" control={<Radio color="primary"/>} label="5"/>
+              </RadioGroup>
+            </div>
+          ))}
         </div>
         <footer>
-          <CustomButton variant="contained" color="primary">Submit</CustomButton>
+          <Button variant="contained" color="primary" disabled={!isFormValid}>Submit</Button>
         </footer>
       </div>
     </div>
